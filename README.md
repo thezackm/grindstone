@@ -1,9 +1,11 @@
 # grindstone
+
 This is a generic repository used to hold various scripts that I use in my day-to-day work.
 
-**Outline:** 
+**Outline:**
+
 - aws
-  - powershell 
+  - powershell
 - gcp
   - powershell
   - python
