@@ -2,6 +2,8 @@
 
 This is a generic repository used to hold various scripts that I use in my day-to-day work.
 
+~Git Cheat: http://rogerdudler.github.io/git-guide/
+
 **Outline:**
 
 - aws
