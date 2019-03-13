@@ -13,7 +13,7 @@
     Version:        1.0
     Author:         Zack Mutchler
     Creation Date:  March 1, 2019
-    Purpose/Change: Initial Script development
+    Purpose/Change: Initial script development
   
 #>
 
