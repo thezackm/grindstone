@@ -1,6 +1,6 @@
 #region Top of Script
 
-#requires -version 3
+#requires -Version 3 -RunAsAdministrator -Modules powershell-yaml, pester
 <#
 
 .SYNOPSIS 
