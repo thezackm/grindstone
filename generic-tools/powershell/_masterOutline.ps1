@@ -4,10 +4,10 @@
 <#
 
 .SYNOPSIS 
-    String
+    Summary of purpose
 
 .DESCRIPTION 
-    String
+    Reference links and details
 
 .NOTES
     Version:        1.0
@@ -34,7 +34,6 @@ Param(
 
     [ parameter( Mandatory = $false ) ]
         [ alias( 'acronym', 'shortName' ) ]
-        [ ValidateSet( "option1", "option2" ) ]
         [ ValidateNotNullOrEmpty() ]
         [ integer ] 
         $paramB
