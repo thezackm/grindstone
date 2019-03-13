@@ -36,8 +36,8 @@ $msiSave = $env:USERPROFILE + '\nrWinUpdate.msi'
 #region Pre-Work
 
 # Start the transcript
-$logFile = ''
-Start-Transcript -Path $logFile
+$logFile = $env:USERPROFILE + '\orionPrep_' + ( Get-Date -Format MM-dd-yyyy_HHmm ) + ".log"
+Start-Transcript -Path $logFile -Force 
 
 #endregion Pre-Work
 
