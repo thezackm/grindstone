@@ -47,7 +47,8 @@ Param(
 #region Pre-Work
 
 # Start the transcript
-$logFile = $env:USERPROFILE + '\orionPrep_' + ( Get-Date -Format MM-dd-yyyy_HHmm ) + ".log"
+$scriptName = $MyInvocation.MyCommand.Name
+$logFile = $env:USERPROFILE + '\'  + $scriptName + '_' + ( Get-Date -Format MM-dd-yyyy_HHmm ) + ".log"
 Start-Transcript -Path $logFile -Force 
 
 # Start the stopwatch
