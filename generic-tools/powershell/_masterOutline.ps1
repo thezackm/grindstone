@@ -23,7 +23,23 @@
 
 #region Script Parameters
 
+Param( 
 
+    [ parameter( Mandatory = $true, HelpMessage = "This is help text for mandatory parameters." ) ]
+        [ alias( 'acronym', 'shortName' ) ]
+        [ ValidateSet( "option1", "option2" ) ]
+        [ ValidateNotNullOrEmpty() ]
+        [ string ] 
+        $paramA,
+
+    [ parameter( Mandatory = $false ) ]
+        [ alias( 'acronym', 'shortName' ) ]
+        [ ValidateSet( "option1", "option2" ) ]
+        [ ValidateNotNullOrEmpty() ]
+        [ integer ] 
+        $paramB
+
+)
 
 #endregion Script Parameters
 
@@ -32,11 +48,11 @@
 #region Pre-Work
 
 # Start the transcript
-$logFile = ''
-Start-Transcript -Path $logFile
+$logFile = $env:USERPROFILE + '\orionPrep_' + ( Get-Date -Format MM-dd-yyyy_HHmm ) + ".log"
+Start-Transcript -Path $logFile -Force 
 
 # Start the stopwatch
-
+$stopWatch = [ System.Diagnostics.Stopwatch ]::StartNew()
 
 #endregion Pre-Work
 
@@ -60,9 +76,9 @@ Start-Transcript -Path $logFile
 
 #region Cleanup
 
-# Stop the stopwatch and show results
-
-
+# Stop the timer
+$stopWatch.Stop()
+Write-Host "`nSCRIPT DURATION: $( $stopWatch.Elapsed.Minutes ) min $( $stopWatch.Elapsed.Seconds ) sec" -ForegroundColor Yellow
 
 # Stop the trainscript
 Stop-Transcript 
