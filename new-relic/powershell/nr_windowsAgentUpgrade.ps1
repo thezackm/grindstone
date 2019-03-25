@@ -14,6 +14,11 @@
     Author:         Zack Mutchler
     Creation Date:  March 1, 2019
     Purpose/Change: Initial script development
+    
+    Version:        1.1
+    Author:         Zack Mutchler
+    Creation Date:  March 25, 2019
+    Purpose/Change: Updated logfile and console output
   
 #>
 
@@ -36,7 +41,7 @@ $msiSave = $env:USERPROFILE + '\nrWinUpdate.msi'
 #region Pre-Work
 
 # Start the transcript
-$logFile = $env:USERPROFILE + '\orionPrep_' + ( Get-Date -Format MM-dd-yyyy_HHmm ) + ".log"
+$logFile = $env:USERPROFILE + '\nrInfraUpdate_' + ( Get-Date -Format MM-dd-yyyy_HHmm ) + ".log"
 Start-Transcript -Path $logFile -Force 
 
 #endregion Pre-Work
@@ -44,6 +49,10 @@ Start-Transcript -Path $logFile -Force
 #####-----------------------------------------------------------------------------------------#####
 
 #region Execution
+
+# Grab the currently installed version
+$installed = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq 'New Relic Infrastructure Agent' }
+Write-Host "Currently Installed Version: $( $installed.Version)" -ForegroundColor Cyan
 
 # Download the installer
 Invoke-WebRequest -Uri $downloadURL -OutFile $msiSave 
@@ -64,10 +73,10 @@ Start-Sleep -Seconds 30
 $service = Get-Service -Name newrelic-infra
 
 # Get the details of the agent install
-$installed = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq 'New Relic Infrastructure Agent' }
+$upgraded = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq 'New Relic Infrastructure Agent' }
 
 # Write our results to console
-Write-Host "$( $service.Name ) is currently: $( $service.Status )`nVersion: $( $installed.Version)" -ForegroundColor Cyan
+Write-Host "$( $service.Name ) is currently: $( $service.Status )`nVersion: $( $upgraded.Version)" -ForegroundColor Green
 
 # Stop the transcript
 Stop-Transcript
