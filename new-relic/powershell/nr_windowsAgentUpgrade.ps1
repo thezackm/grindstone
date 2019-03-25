@@ -19,6 +19,11 @@
     Author:         Zack Mutchler
     Creation Date:  March 25, 2019
     Purpose/Change: Updated logfile and console output
+    
+    Version:        1.2
+    Author:         Zack Mutchler
+    Creation Date:  March 25, 2019
+    Purpose/Change: Removed /qn argument from msiexec.exe
   
 #>
 
@@ -58,7 +63,7 @@ Write-Host "Currently Installed Version: $( $installed.Version)" -ForegroundColo
 Invoke-WebRequest -Uri $downloadURL -OutFile $msiSave 
 
 # Start the installer, quietly
-msiexec.exe /qn /i .\nrWinUpdate.msi
+msiexec.exe /i .\nrWinUpdate.msi
 
 # Wait 30 seconds for the installer, and start the New Relic Infrastructure Agent Service
 Write-Host "Waiting 30 seconds..."
