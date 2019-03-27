@@ -4,10 +4,10 @@
 <#
 
 .SYNOPSIS 
-    String
+    Upgrades the New Relic Windows Infrastructure Agent to latest version
 
 .DESCRIPTION 
-    String
+    https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation/update-infrastructure-agent#windows-update
 
 .NOTES
     Version:        1.0
@@ -24,6 +24,11 @@
     Author:         Zack Mutchler
     Creation Date:  March 25, 2019
     Purpose/Change: Removed /qn argument from msiexec.exe
+    
+    Version:        1.3
+    Author:         Zack Mutchler
+    Creation Date:  March 25, 2019
+    Purpose/Change: Added 32-bit vs 64-bit check
   
 #>
 
@@ -34,7 +39,19 @@
 #region Variables
 
 # Set the download URL for the latest version
-$downloadURL = 'https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi'
+if ( [Environment]::Is64BitOperatingSystem -eq $true ) { 
+	
+	Write-Host "This is a 64-bit OS, setting the download link..." -ForegroundColor Cyan
+	$targetURL = 'https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi'
+	
+}
+
+if ( [Environment]::Is64BitOperatingSystem -eq $false ) { 
+
+	Write-Host "This is a 32-bit OS, setting the download link..." -ForegroundColor Cyan
+	$targetURL = 'https://download.newrelic.com/infrastructure_agent/windows/386/newrelic-infra-386.msi'
+
+}
 
 # Set the save file location for the downloaded MSI
 $msiSave = $env:USERPROFILE + '\nrWinUpdate.msi'
